@@ -16,17 +16,19 @@ public class Main {
 
         /// Info für Marlon mit dem code machst du ein Knopf.
         JButton Knopf = new JButton("Einzahlung");
-        JButton Knopf2Button = new JButton("Auszahlung");
+        JButton Knopf2 = new JButton("Auszahlung");
  
         Knopf.setPreferredSize(new Dimension(201,99)); // <- Hier kannst du die Größe des Knopfes anpassen
         Knopf.setBackground(Color.MAGENTA); // <- Hier kannst du die Farbe des Knopfes anpassen
         Knopf.setForeground(Color.black); // <- Hier kannst du die Schriftfarbe des Knopfes anpassen
 
 
+
+
         /// in einem Panel kannst du mehrere Knöpfe speichern oder auch texte und die dann abrufen.
         JPanel panel = new JPanel();
-        panel.add(Knopf);
-        panel.add(Knopf2Button);  
+        panel.add(Knopf, BorderLayout.CENTER); // <- Hier wird der Knopf in der Mitte des Panels platziert
+        panel.add(Knopf2, BorderLayout.CENTER); // <- Hier wird der Knopf in der Mitte des Panels platziert
         fenster.add(panel);
 
 
