@@ -52,19 +52,25 @@ public class Main {
 
     	fenster.setIconImage(icon.getImage());
         
+        // ========================= Auszahlung =========================
+
         // Aufrufen von Berechnung der Auszahlung
         // Hier wird die Auszahlung berechnet
-        int betrag = 240; // Example amount
-        int[] result = Auszahlung.berechne(betrag);
+        int AuszahlBetrag = 240; // Example amount
+        int[] result = Auszahlung.berechne(AuszahlBetrag);
+
+        // Bei Knopf "Auszahlung" = Input für den Betrag
+        
 
         // Ausgabe der Auszahlung
-        System.out.println("Auszahlungsplan für " + betrag + " Euro:");
+        System.out.println("Auszahlungsplan für " + AuszahlBetrag + " Euro:");
         for (int i = 0; i < result.length; i++) {
             if (result[i] > 0) {
                 System.out.println(result[i] + " x " + Auszahlung.SCHEINWERTE[i] + " Euro");
             }
         }
 
+        // ==============================================================
     }
 
 }
