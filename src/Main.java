@@ -1,6 +1,5 @@
 // Import von Libraries
 import java.awt.*;
-import java.util.Map;
 import javax.swing.*;
 
 // Main Methode
@@ -49,9 +48,15 @@ public class Main {
         // Aufrufen von Berechnung der Auszahlung
         // Hier wird die Auszahlung berechnet
         int betrag = 240; // Example amount
-        Map<Integer, Integer> result = Auszahlung.berechne(betrag);
+        int[] result = Auszahlung.berechne(betrag);
 
-        System.out.println(result);
+        // Ausgabe der Auszahlung
+        System.out.println("Auszahlungsplan für " + betrag + " Euro:");
+        for (int i = 0; i < result.length; i++) {
+            if (result[i] > 0) {
+                System.out.println(result[i] + " x " + Auszahlung.SCHEINWERTE[i] + " Euro");
+            }
+        }
 
     }
 

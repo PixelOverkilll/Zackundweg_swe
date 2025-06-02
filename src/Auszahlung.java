@@ -1,65 +1,74 @@
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class Auszahlung {
 
-    public static final Map<Integer, String> SCHEINWERTE = new LinkedHashMap<>();
-    static {
-        SCHEINWERTE.put(200, "200 Euro Schein(e)");
-        SCHEINWERTE.put(100, "100 Euro Schein(e)");
-        SCHEINWERTE.put(50, "50 Euro Schein(e)");
-        SCHEINWERTE.put(20, "20 Euro Schein(e)");
-        SCHEINWERTE.put(10, "10 Euro Schein(e)");
-        SCHEINWERTE.put(5, "5 Euro Schein(e)");
-    }
+    // Arrays für die Scheinwerte und ihre Beschreibungen
+    public static final int[] SCHEINWERTE = {200, 100, 50, 20, 10, 5};
+    public static final String[] SCHEINBESCHREIBUNGEN = {
+        "200 Euro Schein(e)",
+        "100 Euro Schein(e)",
+        "50 Euro Schein(e)",
+        "20 Euro Schein(e)",
+        "10 Euro Schein(e)",
+        "5 Euro Schein(e)"
+    };
 
-    public static Map<Integer, Integer> berechneAuszahlung(int betrag) {
-        Map<Integer, Integer> auszahlungsPlan = new LinkedHashMap<>(); // Behält die Reihenfolge der Scheine bei
-        int restBetrag = betrag;
-
-        // Überprüfen, ob der Betrag ein Vielfaches von 5 ist
-        if (betrag % 5 != 0) {
-            System.err.println("Fehler: Der Betrag " + betrag + " ist nicht durch 5 teilbar. Kein Restbetrag möglich!");
-            return new LinkedHashMap<>(); // Leere Map im Fehlerfall
-        }
-        
-        // Mindestbetrag von 5 Euro
-        if (betrag < 5) {
-            System.err.println("Fehler: Der Mindestbetrag für eine Auszahlung beträgt 5 Euro!");
-            return new LinkedHashMap<>(); // Leere Map im Fehlerfall
-        }
-
-        // Es wird geprüft, ob der Betrag negativ ist
+    private static boolean istBetragGueltig(int betrag) {
         if (betrag < 0) {
             System.err.println("Fehler: Negative Beträge sind nicht erlaubt!");
-            return new LinkedHashMap<>(); // Leere Map im Fehlerfall
+            return false;
         }
+        
+        if (betrag < 5) {
+            System.err.println("Fehler: Der Mindestbetrag für eine Auszahlung beträgt 5 Euro!");
+            return false;
+        }
+        
+        if (betrag % 5 != 0) {
+            System.err.println("Fehler: Der Betrag " + betrag + " ist nicht durch 5 teilbar. Kein Restbetrag möglich!");
+            return false;
+        }
+        
+        return true;
+    }
 
-        // Sortiert / Aufteilung die Scheinwerte von groß nach klein
-        for (int schein : SCHEINWERTE.keySet()) {
+    public static int[] berechneAuszahlung(int betrag) {
+        // Validierung des Betrags
+        if (!istBetragGueltig(betrag)) {
+            return new int[0]; // Leeres Array im Fehlerfall
+        }
+        
+        int[] auszahlungsPlan = new int[SCHEINWERTE.length];
+        int restBetrag = betrag;
+
+        // Berechnung der Scheinanzahl für jeden Scheinwert
+        for (int i = 0; i < SCHEINWERTE.length; i++) {
+            int schein = SCHEINWERTE[i];
+            
+            // Anzahl der Scheine dieses Werts berechnen
+            int anzahlScheine = restBetrag / schein;
+            auszahlungsPlan[i] = anzahlScheine;
+            
+            // Restbetrag aktualisieren
+            restBetrag -= anzahlScheine * schein;
+            
+            // Abbruch, wenn kein Restbetrag mehr vorhanden
             if (restBetrag == 0) {
-                break; // Gesamter Betrag wurde aufgeteilt
-            }
-            if (restBetrag >= schein) {
-                int anzahlScheine = restBetrag / schein;
-                auszahlungsPlan.put(schein, anzahlScheine);
-                restBetrag %= schein; // Aktualisiere den Restbetrag
-            } else {
-                auszahlungsPlan.put(schein, 0); // Kein Schein dieses Wertes benötigt
+                break;
             }
         }
 
-        // Sollte nicht passieren, wenn der Betrag ein Vielfaches von 5 ist
-        // und 5 als kleinster Schein verfügbar ist.
+        // Prüfen, ob der gesamte Betrag aufgeteilt wurde
         if (restBetrag != 0) {
             System.err.println("Fehler: Der Betrag konnte nicht vollständig aufgeteilt werden. Rest: " + restBetrag);
-            return new LinkedHashMap<>(); // Leere Map im Fehlerfall
+            return new int[0]; // Leeres Array im Fehlerfall
         }
 
         return auszahlungsPlan;
     }
 
-    public static Map<Integer, Integer> berechne(int betrag) {
+    /**
+     * Alias für berechneAuszahlung zur Abwärtskompatibilität.
+     */
+    public static int[] berechne(int betrag) {
         return berechneAuszahlung(betrag);
     }
 }
