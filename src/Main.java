@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
 // Main Methode
 public class Main {
@@ -13,28 +14,28 @@ public class Main {
     	fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     	/// Info für Marlon mit dem code machst du ein Knopf.
-    	JButton Knopf = new JButton("Einzahlung");
-    	JButton Knopf2 = new JButton("Auszahlung");
-    	JButton Knopf3 = new JButton("Kontostand");
+    	JButton Knopf_Einzahlung = new JButton("Einzahlung");
+    	JButton Knopf_Auszahlung = new JButton("Auszahlung");
+    	JButton Knopf_Kontostand = new JButton("Kontostand");
  
-    	Knopf.setPreferredSize(new Dimension(120,80)); // <- Hier kannst du die Größe des Knopfes anpassen
-    	Knopf.setBackground(Color.white); // <- Hier kannst du die Farbe des Knopfes anpassen
-    	Knopf.setForeground(Color.black); // <- Hier kannst du die Schriftfarbe des Knopfes anpassen
+    	Knopf_Einzahlung.setPreferredSize(new Dimension(120,80)); // <- Hier kannst du die Größe des Knopfes anpassen
+    	Knopf_Einzahlung.setBackground(Color.white); // <- Hier kannst du die Farbe des Knopfes anpassen
+    	Knopf_Einzahlung.setForeground(Color.black); // <- Hier kannst du die Schriftfarbe des Knopfes anpassen
    	 
-    	Knopf2.setPreferredSize(new Dimension(120,80));
-    	Knopf2.setBackground(Color.white);
-    	Knopf2.setForeground(Color.black);
+    	Knopf_Auszahlung.setPreferredSize(new Dimension(120,80));
+    	Knopf_Auszahlung.setBackground(Color.white);
+    	Knopf_Auszahlung.setForeground(Color.black);
    	 
-    	Knopf3.setPreferredSize(new Dimension(120,80));
-    	Knopf3.setBackground(Color.white);
-    	Knopf3.setForeground(Color.black);
+    	Knopf_Kontostand.setPreferredSize(new Dimension(120,80));
+    	Knopf_Kontostand.setBackground(Color.white);
+    	Knopf_Kontostand.setForeground(Color.black);
 
 
     	/// in einem Panel kannst du mehrere Knöpfe speichern oder auch texte und die dann abrufen.
     	JPanel panel = new JPanel();
-    	panel.add(Knopf);
-    	panel.add(Knopf2);
-    	panel.add(Knopf3);
+    	panel.add(Knopf_Einzahlung);
+    	panel.add(Knopf_Auszahlung);
+    	panel.add(Knopf_Kontostand);
     	fenster.add(panel);
 
 
@@ -51,26 +52,45 @@ public class Main {
     	icon = new ImageIcon(scaledImage);
 
     	fenster.setIconImage(icon.getImage());
-        
-        // ========================= Auszahlung =========================
+   	 
+    	// ========================= Auszahlung =========================
 
-        // Aufrufen von Berechnung der Auszahlung
-        // Hier wird die Auszahlung berechnet
-        int AuszahlBetrag = 240; // Example amount
-        int[] result = Auszahlung.berechne(AuszahlBetrag);
+    	// Aufrufen von Berechnung der Auszahlung
+    	// Hier wird die Auszahlung berechnet
+    	int AuszahlBetrag = 240; // Example amount
+    	int[] result = Auszahlung.berechne(AuszahlBetrag);
 
-        // Bei Knopf "Auszahlung" = Input für den Betrag
-        
+    	// Bei Knopf "Auszahlung" = Input für den Betrag
+    	Knopf_Auszahlung.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+            	// Hier wird die Methode ausgeführt, wenn der Knopf gedrückt wird
+            	JOptionPane.showMessageDialog(null, "Auszahlung Knopf wurde gedrückt!");
+            	// Du kannst hier deine andere Logik implementieren
+        	}
+    	});
 
-        // Ausgabe der Auszahlung
-        System.out.println("Auszahlungsplan für " + AuszahlBetrag + " Euro:");
-        for (int i = 0; i < result.length; i++) {
-            if (result[i] > 0) {
-                System.out.println(result[i] + " x " + Auszahlung.SCHEINWERTE[i] + " Euro");
-            }
-        }
+    	// Ausgabe der Auszahlung
+    	System.out.println("Auszahlungsplan für " + AuszahlBetrag + " Euro:");
+    	for (int i = 0; i < result.length; i++) {
+        	if (result[i] > 0) {
+            	System.out.println(result[i] + " x " + Auszahlung.SCHEINWERTE[i] + " Euro");
+        	}
+    	}
 
-        // ==============================================================
-    }
+    	// ==============================================================
+
+		// ========================= Einzahlung =========================
+
+    	// Bei Knopf "Einzahlung" = Input für den Betrag
+    	Knopf_Einzahlung.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+            	// Hier wird die Methode ausgeführt, wenn der Knopf gedrückt wird
+            	JOptionPane.showMessageDialog(null, "Einzahlung Knopf wurde gedrückt!");
+            	// Du kannst hier deine andere Logik implementieren
+        	}
+    	});
+
+    	// ==============================================================
+	}
 
 }
