@@ -77,8 +77,6 @@ public class Main {
         	}
     	}
 
-    	// ==============================================================
-
 		// ========================= Einzahlung =========================
 
     	// Bei Knopf "Einzahlung" = Input für den Betrag
@@ -86,6 +84,17 @@ public class Main {
         	public void actionPerformed(ActionEvent e) {
             	// Hier wird die Methode ausgeführt, wenn der Knopf gedrückt wird
             	JOptionPane.showMessageDialog(null, "Einzahlung Knopf wurde gedrückt!");
+            	// Du kannst hier deine andere Logik implementieren
+        	}
+    	});
+
+		// ========================= Kontostand =========================
+
+    	// Bei Knopf "Kontostand" = Input für den Betrag
+    	Knopf_Kontostand.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+            	// Hier wird die Methode ausgeführt, wenn der Knopf gedrückt wird
+            	JOptionPane.showMessageDialog(null, "Kontostand Knopf wurde gedrückt!");
             	// Du kannst hier deine andere Logik implementieren
         	}
     	});
