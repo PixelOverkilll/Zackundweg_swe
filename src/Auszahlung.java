@@ -66,7 +66,7 @@ public class Auszahlung {
     }
 
     /**
-     * Alias für berechneAuszahlung zur Abwärtskompatibilität.
+     * Alias für berechneAuszahlung setzen / Umbennen der Methode
      */
     public static int[] berechne(int betrag) {
         return berechneAuszahlung(betrag);
