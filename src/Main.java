@@ -6,21 +6,20 @@ import java.awt.event.*;
 public class Main {
 
 	public static void main(String[] args) {
-    	// Hier wird das Fenster erstellt
-    	// und die Größe, der Titel und das Schließen des Fensters definiert.
+    	// Hier wird das Fenster erstellt und die Größe, der Titel und das Schließen des Fensters definiert.
     	JFrame fenster = new JFrame("Zack und weg - Geldautomat");
     	fenster.setVisible(true);
     	fenster.setSize(1080, 720);
     	fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    	/// Info für Marlon mit dem code machst du ein Knopf.
+    	/// Hiermit werden neue Knöpfe erstellt
     	JButton Knopf_Einzahlung = new JButton("Einzahlung");
     	JButton Knopf_Auszahlung = new JButton("Auszahlung");
     	JButton Knopf_Kontostand = new JButton("Kontostand");
- 
-    	Knopf_Einzahlung.setPreferredSize(new Dimension(120,80)); // <- Hier kannst du die Größe des Knopfes anpassen
-    	Knopf_Einzahlung.setBackground(Color.white); // <- Hier kannst du die Farbe des Knopfes anpassen
-    	Knopf_Einzahlung.setForeground(Color.black); // <- Hier kannst du die Schriftfarbe des Knopfes anpassen
+
+    	Knopf_Einzahlung.setPreferredSize(new Dimension(120,80)); // <- Größe
+    	Knopf_Einzahlung.setBackground(Color.white); // <- Farbe
+    	Knopf_Einzahlung.setForeground(Color.black); // <- Schriftfarbe
    	 
     	Knopf_Auszahlung.setPreferredSize(new Dimension(120,80));
     	Knopf_Auszahlung.setBackground(Color.white);
