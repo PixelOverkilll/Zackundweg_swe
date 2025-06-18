@@ -1,4 +1,6 @@
-public class Auszahlung {
+
+
+public class Auszahlung extends Main {
 
     // Arrays für die Scheinwerte und ihre Beschreibungen
     public static final int[] SCHEINWERTE = {200, 100, 50, 20, 10, 5};
@@ -66,7 +68,7 @@ public class Auszahlung {
     }
 
     /**
-     * Alias für berechneAuszahlung setzen / Umbennen der Methode
+     * Alias für berechneAuszahlung zur Abwärtskompatibilität.
      */
     public static int[] berechne(int betrag) {
         return berechneAuszahlung(betrag);
