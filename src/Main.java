@@ -73,40 +73,51 @@ public class Main {
         // Hier wird die Auszahlung berechnet
 
         // Bei Knopf "Auszahlung" = Input für den Betrag
-         Knopf_Auszahlung.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-				try {
-					int betrag = Integer.parseInt(textField.getText());
-					if (betrag <= 0) {
-						JOptionPane.showMessageDialog(panel, "Bitte geben Sie einen positiven Betrag ein!");
-						return;
-					}
-					kontostand[0] -= betrag; // Hier wird der Betrag vom Kontostand abgezogen
-					textField2.setText("Sie haben " + betrag + " € abgehoben.");
-				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(panel, "Bitte eine gültige Zahl eingeben!");
-				}
-			}
-		});
+     Knopf_Auszahlung.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        try {
+            int betrag = Integer.parseInt(textField.getText());
+
+            if (betrag > kontostand[0]) {
+                JOptionPane.showMessageDialog(panel, "Nicht genügend Guthaben!");
+                return;
+            }
+
+            int[] result = Auszahlung.berechne(betrag);
+            if (result.length == 0) {
+                JOptionPane.showMessageDialog(panel, "Ungültiger Betrag! Du kannst nur Beträge ab 5€ abheben");
+            }
+
+            kontostand[0] -= betrag; // Betrag vom Kontostand abziehen
+            textField2.setText("Sie haben " + betrag + " € abgehoben.");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(panel, "Bitte eine gültige Zahl eingeben!");
+        }
+    }
+});
+
 
         // ========================= Einzahlung =========================
 
         // Bei Knopf "Einzahlung" = Input für den Betrag
         Knopf_Einzahlung.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-				try {
-					int betrag = Integer.parseInt(textField.getText());
-					if (betrag <= 0) {
-						JOptionPane.showMessageDialog(panel, "Bitte geben Sie einen positiven Betrag ein!");
-						return;
-					}
-					kontostand[0] += betrag; // Hier wird der Betrag zum Kontostand hinzugefügt
-					textField2.setText("Sie haben " + betrag + " € eingezahlt.");
-				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(panel, "Bitte eine gültige Zahl eingeben!");
-				}
-			}
-		});
+    public void actionPerformed(ActionEvent e) {
+        try {
+            int betrag = Integer.parseInt(textField.getText());
+
+            int[] result = Einzahlung.berechne(betrag);
+            if (result.length == 0) {
+                JOptionPane.showMessageDialog(panel, "Ungültiger Betrag! Du musst mindestens 5€ einzahlen");
+            }
+
+            kontostand[0] += betrag; // Betrag zum Kontostand hinzufügen
+            textField2.setText("Sie haben " + betrag + " € eingezahlt.");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(panel, "Bitte eine gültige Zahl eingeben!");
+        }
+    }
+});
+
 
         // ========================= Kontostand =========================
 
