@@ -1,6 +1,6 @@
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 // Main Methode
 public class Main {
@@ -32,6 +32,7 @@ public class Main {
 
         /// in einem Panel kannst du mehrere Knöpfe speichern oder auch texte und die dann abrufen.
         JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER)); // <- Layout für das Panel
         panel.add(Knopf_Einzahlung);
         panel.add(Knopf_Auszahlung);
         panel.add(Knopf_Kontostand);
@@ -66,54 +67,53 @@ public class Main {
         fenster.setIconImage(icon.getImage());
         
         // ========================= Auszahlung =========================
+		int[] kontostand = {0}; // Kontostand initialisieren
 
         // Aufrufen von Berechnung der Auszahlung
         // Hier wird die Auszahlung berechnet
-        int AuszahlBetrag = 240; // Example amount
-        int[] result = Auszahlung.berechne(AuszahlBetrag);
 
         // Bei Knopf "Auszahlung" = Input für den Betrag
-        Knopf_Auszahlung.addActionListener(new ActionListener() {
+         Knopf_Auszahlung.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                    
-                    textField2.setVisible(true);
-                textField2.setText("sie haben " + AuszahlBetrag + " Euro Ausgezahlt" );
-            }
-        });
-
-        // Ausgabe der Auszahlung
-        System.out.println("Auszahlungsplan für " + AuszahlBetrag + " Euro:");
-        for (int i = 0; i < result.length; i++) {
-            if (result[i] > 0) {
-                System.out.println(result[i] + " x " + Auszahlung.SCHEINWERTE[i] + " Euro");
-            }
-        }
+				try {
+					int betrag = Integer.parseInt(textField.getText());
+					if (betrag <= 0) {
+						JOptionPane.showMessageDialog(panel, "Bitte geben Sie einen positiven Betrag ein!");
+						return;
+					}
+					kontostand[0] -= betrag; // Hier wird der Betrag vom Kontostand abgezogen
+					textField2.setText("Sie haben " + betrag + " € abgehoben.");
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(panel, "Bitte eine gültige Zahl eingeben!");
+				}
+			}
+		});
 
         // ========================= Einzahlung =========================
 
         // Bei Knopf "Einzahlung" = Input für den Betrag
         Knopf_Einzahlung.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Hier wird die Methode ausgeführt, wenn der Knopf gedrückt wird
-                JOptionPane.showMessageDialog(null, "Einzahlung Knopf wurde gedrückt!");
-                // Du kannst hier deine andere Logik implementieren
-                try {
-                    int zahl = Integer.parseInt(textField.getText());
-                    JOptionPane.showMessageDialog(panel, "Eingegebene Zahl: " + zahl);
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(panel, "Bitte eine gültige Zahl eingeben!");
-                }
-            }
-        });
+				try {
+					int betrag = Integer.parseInt(textField.getText());
+					if (betrag <= 0) {
+						JOptionPane.showMessageDialog(panel, "Bitte geben Sie einen positiven Betrag ein!");
+						return;
+					}
+					kontostand[0] += betrag; // Hier wird der Betrag zum Kontostand hinzugefügt
+					textField2.setText("Sie haben " + betrag + " € eingezahlt.");
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(panel, "Bitte eine gültige Zahl eingeben!");
+				}
+			}
+		});
 
         // ========================= Kontostand =========================
 
         // Bei Knopf "Kontostand" = Input für den Betrag
         Knopf_Kontostand.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Hier wird die Methode ausgeführt, wenn der Knopf gedrückt wird
-                JOptionPane.showMessageDialog(null, "Kontostand Knopf wurde gedrückt!");
-                // Du kannst hier deine andere Logik implementieren
+               textField2.setText("Aktueller Kontostand: " + kontostand[0] + " €");
             }
         });
 
