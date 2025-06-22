@@ -5,8 +5,40 @@ import javax.swing.*;
 // Main Methode
 public class Main {
 
+    public static void zeigeStartGif() {
+        JWindow splash = new JWindow();
+        ImageIcon icon = new ImageIcon("start.gif");
+        // GIF skalieren
+        Image image = icon.getImage().getScaledInstance(800, 800, Image.SCALE_DEFAULT);
+        ImageIcon scaledIcon = new ImageIcon(image);
+        JLabel gifLabel = new JLabel(scaledIcon);
+        splash.getContentPane().add(gifLabel);
+        splash.pack();
+        // Fenster zentrieren
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - splash.getWidth()) / 2;
+        int y = (screenSize.height - splash.getHeight()) / 2;
+        splash.setLocation(x, y);
+        splash.setVisible(true);
+
+        // GIF für 3 Sekunden anzeigen
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        splash.setVisible(false);
+        splash.dispose();
+    }
+
     public static void main(String[] args) {
+        // Start-GIF anzeigen
+        zeigeStartGif();
+
         // Hier wird das Fenster erstellt und die Größe, der Titel und das Schließen des Fensters definiert.
+
+
+
         JFrame fenster = new JFrame("Zack und weg - Geldautomat");
         fenster.setVisible(true);
         fenster.setSize(1080, 720);
@@ -57,14 +89,14 @@ public class Main {
         panel.setBackground(Background);
        
         // Eigenes Fenster Image
-        ImageIcon icon = new ImageIcon("BankIcon.png");
+        ImageIcon icon2 = new ImageIcon("BankIcon.png");
 
         // Größe des Icons anpassen
-        Image image = icon.getImage();
-        Image scaledImage = image.getScaledInstance(300, 300,  java.awt.Image.SCALE_SMOOTH);
-        icon = new ImageIcon(scaledImage);
+        Image image2 = icon2.getImage();
+        Image scaledImage = image2.getScaledInstance(300, 300,  java.awt.Image.SCALE_SMOOTH);
+        icon2 = new ImageIcon(scaledImage);
 
-        fenster.setIconImage(icon.getImage());
+        fenster.setIconImage(icon2.getImage());
         
         // ========================= Auszahlung =========================
 		int[] kontostand = {0}; // Kontostand initialisieren
