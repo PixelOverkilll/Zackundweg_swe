@@ -43,6 +43,11 @@ public class Main {
         fenster.setVisible(true);
         fenster.setSize(1080, 720);
         fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - fenster.getWidth()) / 2;
+        int y = (screenSize.height - fenster.getHeight()) / 2;
+        fenster.setLocation(x, y);
+        fenster.setVisible(true);
 
         /// Hiermit werden neue Knöpfe erstellt
         JButton Knopf_Einzahlung = new JButton("Einzahlung");
