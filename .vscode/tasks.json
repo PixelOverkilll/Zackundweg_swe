@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Compile and create executable JAR",
+			"command": "javac -d out src/*.java && jar cfe Zackundweg_executable.jar Main -C out .",
+			"args": [],
+			"group": "build",
+			"problemMatcher": [
+				"$javac"
+			]
+		}
+	]
+}

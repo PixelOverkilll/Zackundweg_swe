@@ -7,28 +7,30 @@ public class Main {
 
     public static void zeigeStartGif() {
         JWindow splash = new JWindow();
-        ImageIcon icon = new ImageIcon("start.gif");
-        // GIF skalieren
-        Image image = icon.getImage().getScaledInstance(800, 800, Image.SCALE_DEFAULT);
-        ImageIcon scaledIcon = new ImageIcon(image);
-        JLabel gifLabel = new JLabel(scaledIcon);
-        splash.getContentPane().add(gifLabel);
-        splash.pack();
-        // Fenster zentrieren
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screenSize.width - splash.getWidth()) / 2;
-        int y = (screenSize.height - splash.getHeight()) / 2;
-        splash.setLocation(x, y);
-        splash.setVisible(true);
+        ImageIcon icon = ResourceLoader.loadIcon("start.gif");
+        if (icon != null) {
+            // GIF skalieren
+            Image image = icon.getImage().getScaledInstance(800, 800, Image.SCALE_DEFAULT);
+            ImageIcon scaledIcon = new ImageIcon(image);
+            JLabel gifLabel = new JLabel(scaledIcon);
+            splash.getContentPane().add(gifLabel);
+            splash.pack();
+            // Fenster zentrieren
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            int x = (screenSize.width - splash.getWidth()) / 2;
+            int y = (screenSize.height - splash.getHeight()) / 2;
+            splash.setLocation(x, y);
+            splash.setVisible(true);
 
-        // GIF für 3 Sekunden anzeigen
-        try {
-            Thread.sleep(2500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            // GIF für 3 Sekunden anzeigen
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            splash.setVisible(false);
+            splash.dispose();
         }
-        splash.setVisible(false);
-        splash.dispose();
     }
 
     public static void main(String[] args) {
@@ -53,9 +55,11 @@ public class Main {
         logoPanel.setBackground(backgroundColor);
         
         // Logo laden und anzeigen
-        ImageIcon bankLogo = new ImageIcon("BankIcon.png");
-        Image scaledImage = bankLogo.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-        bankLogo = new ImageIcon(scaledImage);
+        ImageIcon bankLogo = ResourceLoader.loadIcon("Bank2.png");
+        if (bankLogo != null) {
+            Image scaledImage = bankLogo.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+            bankLogo = new ImageIcon(scaledImage);
+        }
         JLabel logoLabel = new JLabel(bankLogo);
         logoPanel.add(logoLabel);
         
@@ -153,12 +157,14 @@ public class Main {
         buttonPanel.add(Knopf_Kontostand);
         
         // Eigenes Fenster Image
-        ImageIcon icon2 = new ImageIcon("BankIcon.png");
-        // Größe des Icons anpassen (für das Fenster-Icon)
-        Image image2 = icon2.getImage();
-        Image scaledIcon = image2.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
-        icon2 = new ImageIcon(scaledIcon);
-        fenster.setIconImage(icon2.getImage());
+        ImageIcon icon2 = ResourceLoader.loadIcon("BankIcon.png");
+        if (icon2 != null) {
+            // Größe des Icons anpassen (für das Fenster-Icon)
+            Image image2 = icon2.getImage();
+            Image scaledIcon = image2.getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH);
+            icon2 = new ImageIcon(scaledIcon);
+            fenster.setIconImage(icon2.getImage());
+        }
         
         // Panels zusammenfügen
         JPanel centerPanel = new JPanel(new BorderLayout(10, 10));
