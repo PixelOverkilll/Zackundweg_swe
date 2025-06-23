@@ -184,7 +184,7 @@ public class Main {
         fenster.setLocationRelativeTo(null);
         fenster.setVisible(true);
         
-        // ========================= Kontostand =========================
+        // ========================= Auzahlung =========================
         int[] kontostand = {0}; // Kontostand initialisieren
 
         // Bei Knopf "Auszahlung" = Input für den Betrag
@@ -205,7 +205,9 @@ public class Main {
                     }
 
                     kontostand[0] -= betrag; // Betrag vom Kontostand abziehen
-                    displayField.setText("Sie haben " + betrag + " € abgehoben.");
+                    displayField.setText("Sie haben " + betrag + " € abgehoben." + "\n" +
+                            "Auszahlungsplan:\n" +
+                            Auszahlung.getAuszahlungsPlan(result));
                     inputField.setText("");
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(fenster, "Bitte eine gültige Zahl eingeben!");

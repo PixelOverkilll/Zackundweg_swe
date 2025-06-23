@@ -73,4 +73,19 @@ public class Auszahlung extends Main {
     public static int[] berechne(int betrag) {
         return berechneAuszahlung(betrag);
     }
+
+    // Fügt die Methode hinzu, um den Auszahlungsplan als String zurückzugeben
+    public static String getAuszahlungsPlan(int[] scheine) {
+        if (scheine == null || scheine.length == 0) {
+            return "Kein Auszahlungsplan verfügbar.";
+        }
+        int[] stueckelungen = {200, 100, 50, 20, 10, 5};
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < scheine.length && i < stueckelungen.length; i++) {
+            if (scheine[i] > 0) {
+                sb.append(scheine[i]).append(" x ").append(stueckelungen[i]).append("€\n");
+            }
+        }
+        return sb.toString();
+    }
 }
